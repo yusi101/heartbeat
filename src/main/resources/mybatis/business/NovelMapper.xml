@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.business.novel.mapper.NovelMapper">
+    
+    <resultMap type="Novel" id="NovelResult">
+        <result property="novelId"    column="novel_id"    />
+        <result property="novelTitle"    column="novel_title"    />
+        <result property="novelType"    column="novel_type"    />
+        <result property="novelLabel"    column="novel_label"    />
+        <result property="novelImg"    column="novel_img"    />
+        <result property="novelDescribe"    column="novel_describe"    />
+        <result property="novelContent"    column="novel_content"    />
+        <result property="novelLink"    column="novel_link"    />
+        <result property="novelLinknotes"    column="novel_linknotes"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="uuid"    column="uuid"    />
+    </resultMap>
+
+    <sql id="selectNovelVo">
+        select novel_id, novel_title, novel_type, novel_label, novel_img, novel_describe, novel_content, novel_link, novel_linknotes, status, create_by, create_time, update_by, update_time, remark, uuid from bl_novel
+    </sql>
+
+    <sql id="selectNovelCut">
+        select novel_id, novel_title, update_time from bl_novel
+    </sql>
+
+    <select id="selectNovelList" parameterType="Novel" resultMap="NovelResult">
+        <include refid="selectNovelVo"/>
+        <where>  
+            <if test="novelTitle != null  and novelTitle != ''"> and novel_title = #{novelTitle}</if>
+            <if test="novelType != null  and novelType != ''"> and novel_type = #{novelType}</if>
+            <if test="novelLabel != null  and novelLabel != ''"> and novel_label = #{novelLabel}</if>
+            <if test="novelImg != null  and novelImg != ''"> and novel_img = #{novelImg}</if>
+            <if test="novelDescribe != null  and novelDescribe != ''"> and novel_describe = #{novelDescribe}</if>
+            <if test="novelContent != null  and novelContent != ''"> and novel_content = #{novelContent}</if>
+            <if test="novelLink != null  and novelLink != ''"> and novel_link = #{novelLink}</if>
+            <if test="novelLinknotes != null  and novelLinknotes != ''"> and novel_linknotes = #{novelLinknotes}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectNovelById" parameterType="Integer" resultMap="NovelResult">
+        <include refid="selectNovelVo"/>
+        where novel_id = #{novelId}
+    </select>
+        
+    <insert id="insertNovel" parameterType="Novel" useGeneratedKeys="true" keyProperty="novelId">
+        insert into bl_novel
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="novelTitle != null  and novelTitle != ''">novel_title,</if>
+            <if test="novelType != null  and novelType != ''">novel_type,</if>
+            <if test="novelLabel != null  and novelLabel != ''">novel_label,</if>
+            <if test="novelImg != null  and novelImg != ''">novel_img,</if>
+            <if test="novelDescribe != null  and novelDescribe != ''">novel_describe,</if>
+            <if test="novelContent != null  and novelContent != ''">novel_content,</if>
+            <if test="novelLink != null  and novelLink != ''">novel_link,</if>
+            <if test="novelLinknotes != null  and novelLinknotes != ''">novel_linknotes,</if>
+            <if test="status != null  and status != ''">status,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="uuid != null  and uuid != ''">uuid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="novelTitle != null  and novelTitle != ''">#{novelTitle},</if>
+            <if test="novelType != null  and novelType != ''">#{novelType},</if>
+            <if test="novelLabel != null  and novelLabel != ''">#{novelLabel},</if>
+            <if test="novelImg != null  and novelImg != ''">#{novelImg},</if>
+            <if test="novelDescribe != null  and novelDescribe != ''">#{novelDescribe},</if>
+            <if test="novelContent != null  and novelContent != ''">#{novelContent},</if>
+            <if test="novelLink != null  and novelLink != ''">#{novelLink},</if>
+            <if test="novelLinknotes != null  and novelLinknotes != ''">#{novelLinknotes},</if>
+            <if test="status != null  and status != ''">#{status},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="uuid != null  and uuid != ''">#{uuid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateNovel" parameterType="Novel">
+        update bl_novel
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="novelTitle != null  and novelTitle != ''">novel_title = #{novelTitle},</if>
+            <if test="novelType != null  and novelType != ''">novel_type = #{novelType},</if>
+            <if test="novelLabel != null  and novelLabel != ''">novel_label = #{novelLabel},</if>
+            <if test="novelImg != null  and novelImg != ''">novel_img = #{novelImg},</if>
+            <if test="novelDescribe != null  and novelDescribe != ''">novel_describe = #{novelDescribe},</if>
+            <if test="novelContent != null  and novelContent != ''">novel_content = #{novelContent},</if>
+            <if test="novelLink != null  and novelLink != ''">novel_link = #{novelLink},</if>
+            <if test="novelLinknotes != null  and novelLinknotes != ''">novel_linknotes = #{novelLinknotes},</if>
+            <if test="status != null  and status != ''">status = #{status},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="uuid != null  and uuid != ''">uuid = #{uuid},</if>
+        </trim>
+        where novel_id = #{novelId}
+    </update>
+
+    <delete id="deleteNovelById" parameterType="Integer">
+        delete from bl_novel where novel_id = #{novelId}
+    </delete>
+
+    <delete id="deleteNovelByIds" parameterType="String">
+        delete from bl_novel where novel_id in 
+        <foreach item="novelId" collection="array" open="(" separator="," close=")">
+            #{novelId}
+        </foreach>
+    </delete>
+
+    <select id="selectNovelListByNewest" parameterType="Integer" resultMap="NovelResult">
+        <include refid="selectNovelCut"/>
+        where 1=1 and status = '0' ORDER BY update_time DESC LIMIT 9
+    </select>
+</mapper>

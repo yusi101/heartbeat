@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header(${novelTitle}+'-小说详情')" />
+    <th:block th:include="include :: summernote-css" />
+</head>
+<body class="white-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-8" id="Business_1">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th colspan="5" style="text-align:center;"><h2>[[${novel.novelTitle}]]</h2></th>
+                    </tr>
+                    <tr>
+                        <th colspan="2" style="text-align:left;">作者：[[${novel.updateBy}]]</th>
+                        <th style="text-align:center;">喜爱人数：xxxxx</th>
+                        <th colspan="2" style="text-align:right;">时间：[[${#dates.format(novel.updateTime,'yyyy-MM-dd HH:mm')}]]</th>
+                    </tr>
+                    <tr>
+                        <th colspan="5" style="line-height: 28px">标签：
+                            <span th:each="lang: ${LabelList}">
+                                <span class="btn btn-primary btn-xs" th:text="${lang}"></span>
+                            </span>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td colspan="5">
+                            <div id="summernote"></div>
+                            <input type="hidden" id="novel_content" th:field="*{novel.novelContent}">
+                        </td>
+
+                    </tr>
+                    <tr th:if=" ${novel.novelLink} eq ''">>
+                        <th class="text-nowrap">外链：</th>
+                        <td colspan="4">[[${novel.novelLink}]]</td>
+                    </tr>
+                    <tr th:if=" ${novel.novelLinknotes} eq ''">
+                        <th class="text-nowrap">备注：</th>
+                        <td colspan="4">[[${novel.novelLinknotes}]]</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-sm-4" id="Business_2">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>最新小说</h5>
+                </div>
+                <div class="ibox-content" id="newest1">
+                </div>
+            </div>
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>热门小说</h5>
+                </div>
+                <div class="ibox-content" id="newest2">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="bootstrap-table"></table>
+        </div>
+    </div>
+</div>
+<th:block th:include="include :: footer" />
+<th:block th:include="include :: summernote-js" />
+<script type="text/javascript">
+    var prefix = ctx + "business/novel";
+    function tabclick(title,url){
+        $.modal.openTab(title+'-小说详情', url);
+    }
+    $(function(){
+        var innerhtml = $("#novel_content").val();
+        $("#summernote").html(innerhtml);
+
+        $.ajax({
+            type: "POST",
+            url: prefix + "/newest",
+            success: function(result) {
+                var data = eval('('+result+')');
+                var str = "";
+                for(var i=0;i<9;i++){
+                    if(i<data.length){
+                        var url = prefix + "/view/"+data[i].novelId;
+                        str += "<a href='#' onclick=\"tabclick('"+data[i].novelTitle+"','"+url+"')\">";
+                        str += "<p>No."+(i+1)+" "+data[i].novelTitle+"</p>";
+                        str += "</a>";
+                    }else{
+                        str += "<br>";
+                    }
+                }
+                $("#newest1").html(str);
+                $("#newest2").html(str);
+            }
+        });
+    });
+</script>
+</body>
+</html>

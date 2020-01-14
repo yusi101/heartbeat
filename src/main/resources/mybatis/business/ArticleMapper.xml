@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.business.article.mapper.ArticleMapper">
+    
+    <resultMap type="Article" id="ArticleResult">
+        <result property="articleId"    column="article_id"    />
+        <result property="articleTitle"    column="article_title"    />
+        <result property="articleType"    column="article_type"    />
+        <result property="articleLabel"    column="article_label"    />
+        <result property="articleImg"    column="article_img"    />
+        <result property="articleDescribe"    column="article_describe"    />
+        <result property="articleContent"    column="article_content"    />
+        <result property="articleLink"    column="article_link"    />
+        <result property="articleLinknotes"    column="article_linknotes"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="uuid"    column="uuid"    />
+    </resultMap>
+
+    <sql id="selectArticleVo">
+        select article_id, article_title, article_type, article_label, article_img, article_describe, article_content, article_link, article_linknotes, status, create_by, create_time, update_by, update_time, remark, uuid from bl_article
+    </sql>
+    <sql id="selectArticleCut">
+        select article_id, article_title, update_time from bl_article
+    </sql>
+    <select id="selectArticleList" parameterType="Article" resultMap="ArticleResult">
+        <include refid="selectArticleVo"/>
+        <where>  
+            <if test="articleTitle != null  and articleTitle != ''"> and article_title = #{articleTitle}</if>
+            <if test="articleType != null  and articleType != ''"> and article_type = #{articleType}</if>
+            <if test="articleLabel != null  and articleLabel != ''"> and article_label = #{articleLabel}</if>
+            <if test="articleImg != null  and articleImg != ''"> and article_img = #{articleImg}</if>
+            <if test="articleDescribe != null  and articleDescribe != ''"> and article_describe = #{articleDescribe}</if>
+            <if test="articleContent != null  and articleContent != ''"> and article_content = #{articleContent}</if>
+            <if test="articleLink != null  and articleLink != ''"> and article_link = #{articleLink}</if>
+            <if test="articleLinknotes != null  and articleLinknotes != ''"> and article_linknotes = #{articleLinknotes}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectArticleById" parameterType="Integer" resultMap="ArticleResult">
+        <include refid="selectArticleVo"/>
+        where article_id = #{articleId}
+    </select>
+
+    <insert id="insertArticle" parameterType="Article" useGeneratedKeys="true" keyProperty="articleId">
+        insert into bl_article
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="articleTitle != null  and articleTitle != ''">article_title,</if>
+            <if test="articleType != null  and articleType != ''">article_type,</if>
+            <if test="articleLabel != null  and articleLabel != ''">article_label,</if>
+            <if test="articleImg != null  and articleImg != ''">article_img,</if>
+            <if test="articleDescribe != null  and articleDescribe != ''">article_describe,</if>
+            <if test="articleContent != null  and articleContent != ''">article_content,</if>
+            <if test="articleLink != null  and articleLink != ''">article_link,</if>
+            <if test="articleLinknotes != null  and articleLinknotes != ''">article_linknotes,</if>
+            <if test="status != null  and status != ''">status,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="uuid != null  and uuid != ''">uuid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="articleTitle != null  and articleTitle != ''">#{articleTitle},</if>
+            <if test="articleType != null  and articleType != ''">#{articleType},</if>
+            <if test="articleLabel != null  and articleLabel != ''">#{articleLabel},</if>
+            <if test="articleImg != null  and articleImg != ''">#{articleImg},</if>
+            <if test="articleDescribe != null  and articleDescribe != ''">#{articleDescribe},</if>
+            <if test="articleContent != null  and articleContent != ''">#{articleContent},</if>
+            <if test="articleLink != null  and articleLink != ''">#{articleLink},</if>
+            <if test="articleLinknotes != null  and articleLinknotes != ''">#{articleLinknotes},</if>
+            <if test="status != null  and status != ''">#{status},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="uuid != null  and uuid != ''">#{uuid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateArticle" parameterType="Article">
+        update bl_article
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="articleTitle != null  and articleTitle != ''">article_title = #{articleTitle},</if>
+            <if test="articleType != null  and articleType != ''">article_type = #{articleType},</if>
+            <if test="articleLabel != null  and articleLabel != ''">article_label = #{articleLabel},</if>
+            <if test="articleImg != null  and articleImg != ''">article_img = #{articleImg},</if>
+            <if test="articleDescribe != null  and articleDescribe != ''">article_describe = #{articleDescribe},</if>
+            <if test="articleContent != null  and articleContent != ''">article_content = #{articleContent},</if>
+            <if test="articleLink != null  and articleLink != ''">article_link = #{articleLink},</if>
+            <if test="articleLinknotes != null  and articleLinknotes != ''">article_linknotes = #{articleLinknotes},</if>
+            <if test="status != null  and status != ''">status = #{status},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="uuid != null  and uuid != ''">uuid = #{uuid},</if>
+        </trim>
+        where article_id = #{articleId}
+    </update>
+
+    <delete id="deleteArticleById" parameterType="Integer">
+        delete from bl_article where article_id = #{articleId}
+    </delete>
+
+    <delete id="deleteArticleByIds" parameterType="String">
+        delete from bl_article where article_id in 
+        <foreach item="articleId" collection="array" open="(" separator="," close=")">
+            #{articleId}
+        </foreach>
+    </delete>
+
+    <select id="selectArticleListByNewest" parameterType="Integer" resultMap="ArticleResult">
+        <include refid="selectArticleCut"/>
+        where 1=1 and status = '0' ORDER BY update_time DESC LIMIT 9
+    </select>
+</mapper>

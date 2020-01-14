@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('游戏列表')" />
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-4" id="Business_1"></div>
+        <div class="col-sm-4" id="Business_2"></div>
+        <div class="col-sm-4" id="Business_3">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>最新游戏</h5>
+                </div>
+                <div class="ibox-content" id="newest1">
+                </div>
+            </div>
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>热门游戏</h5>
+                </div>
+                <div class="ibox-content" id="newest2">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="bootstrap-table"></table>
+        </div>
+    </div>
+</div>
+<th:block th:include="include :: footer" />
+<script th:inline="javascript">
+    var types = [[${@dict.getType('sys_article_type')}]];
+    var datas = [[${@dict.getType('sys_notice_status')}]];
+    var prefix = ctx + "business/game";
+    function tabclick(title,url){
+        $.modal.openTab(title+'-游戏详情', url);
+    }
+
+    $(function() {
+        var options = {
+            url: prefix + "/list",
+            detailUrl: prefix + "/view/{id}",
+            showSearch: false,
+            showRefresh: false,
+            showToggle: false,
+            showColumns: false,
+            modalName: "游戏",
+            onLoadSuccess : function(data) {
+                var data = data.rows;
+                var str1 ="";
+                var str2 ="";
+                for(var i = 0;i<data.length;i++){
+                    var date = new Date(data[i].updateTime);
+                    var url = $.operate.detailUrl(data[i].gameId);
+                    var str = "<a class='menuItem' href='#' onclick=\"tabclick('"+data[i].gameTitle+"','"+url+"')\"><div class='ibox'>";
+                    str += "   <div class='ibox-title'>";
+                    str += "       <h5>"+$.table.selectDictLabel(types, data[i].gameType)+"&nbsp;"+data[i].gameTitle+"</h5>";
+                    str += "   </div>";
+                    str += "   <div class='ibox-content'>";
+                    str += "       <p style='align-content: center'>"+$.table.imageViewOri(data[i].gameImg)+"</p>";
+                    str += "       <div>";
+                    str += "           <span>作者："+data[i].updateBy+"</span>";
+                    str += "           <div class='stat-percent'>"+date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()+"</div>";
+                    str += "           <div class='progress progress-mini'>";
+                    str += "               <div style='width: 32%;' class='progress-bar'></div>";
+                    str += "           </div>";
+                    str += "       </div>";
+                    str += "       <div class='m-t-sm'>";
+                    str += "           标签：";
+                    str += "       </div>";
+                    str += "   </div></a>";
+                    str += "</div>";
+                    if(i%2!=0){
+                        str2 += str;
+                    }else{
+                        str1 += str;
+                    }
+
+                }
+                $("#Business_1").html(str1);
+                $("#Business_2").html(str2);
+            }
+        };
+        $.table.init(options);
+
+        $.ajax({
+            type: "POST",
+            url: prefix + "/newest",
+            success: function(result) {
+                var data = eval('('+result+')');
+                var str = "";
+                for(var i=0;i<9;i++){
+                    if(i<data.length){
+                        var url = $.operate.detailUrl(data[i].gameId);
+                        str += "<a href='#' onclick=\"tabclick('"+data[i].gameTitle+"','"+url+"')\">";
+                        str += "<p>No."+(i+1)+" "+data[i].gameTitle+"</p>";
+                        str += "</a>";
+                    }else{
+                        str += "<br>";
+                    }
+                }
+                $("#newest1").html(str);
+                $("#newest2").html(str);
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.business.movie.mapper.MovieMapper">
+    
+    <resultMap type="Movie" id="MovieResult">
+        <result property="movieId"    column="movie_id"    />
+        <result property="movieTitle"    column="movie_title"    />
+        <result property="movieType"    column="movie_type"    />
+        <result property="movieLabel"    column="movie_label"    />
+        <result property="movieImg"    column="movie_img"    />
+        <result property="movieDescribe"    column="movie_describe"    />
+        <result property="movieContent"    column="movie_content"    />
+        <result property="movieLink"    column="movie_link"    />
+        <result property="movieLinknotes"    column="movie_linknotes"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="uuid"    column="uuid"    />
+    </resultMap>
+
+    <sql id="selectMovieVo">
+        select movie_id, movie_title, movie_type, movie_label, movie_img, movie_describe, movie_content, movie_link, movie_linknotes, status, create_by, create_time, update_by, update_time, remark, uuid from bl_movie
+    </sql>
+
+    <sql id="selectMovieCut">
+        select movie_id, movie_title, update_time from bl_movie
+    </sql>
+
+    <select id="selectMovieList" parameterType="Movie" resultMap="MovieResult">
+        <include refid="selectMovieVo"/>
+        <where>  
+            <if test="movieTitle != null  and movieTitle != ''"> and movie_title = #{movieTitle}</if>
+            <if test="movieType != null  and movieType != ''"> and movie_type = #{movieType}</if>
+            <if test="movieLabel != null  and movieLabel != ''"> and movie_label = #{movieLabel}</if>
+            <if test="movieImg != null  and movieImg != ''"> and movie_img = #{movieImg}</if>
+            <if test="movieDescribe != null  and movieDescribe != ''"> and movie_describe = #{movieDescribe}</if>
+            <if test="movieContent != null  and movieContent != ''"> and movie_content = #{movieContent}</if>
+            <if test="movieLink != null  and movieLink != ''"> and movie_link = #{movieLink}</if>
+            <if test="movieLinknotes != null  and movieLinknotes != ''"> and movie_linknotes = #{movieLinknotes}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectMovieById" parameterType="Integer" resultMap="MovieResult">
+        <include refid="selectMovieVo"/>
+        where movie_id = #{movieId}
+    </select>
+        
+    <insert id="insertMovie" parameterType="Movie" useGeneratedKeys="true" keyProperty="movieId">
+        insert into bl_movie
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="movieTitle != null  and movieTitle != ''">movie_title,</if>
+            <if test="movieType != null  and movieType != ''">movie_type,</if>
+            <if test="movieLabel != null  and movieLabel != ''">movie_label,</if>
+            <if test="movieImg != null  and movieImg != ''">movie_img,</if>
+            <if test="movieDescribe != null  and movieDescribe != ''">movie_describe,</if>
+            <if test="movieContent != null  and movieContent != ''">movie_content,</if>
+            <if test="movieLink != null  and movieLink != ''">movie_link,</if>
+            <if test="movieLinknotes != null  and movieLinknotes != ''">movie_linknotes,</if>
+            <if test="status != null  and status != ''">status,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="uuid != null  and uuid != ''">uuid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="movieTitle != null  and movieTitle != ''">#{movieTitle},</if>
+            <if test="movieType != null  and movieType != ''">#{movieType},</if>
+            <if test="movieLabel != null  and movieLabel != ''">#{movieLabel},</if>
+            <if test="movieImg != null  and movieImg != ''">#{movieImg},</if>
+            <if test="movieDescribe != null  and movieDescribe != ''">#{movieDescribe},</if>
+            <if test="movieContent != null  and movieContent != ''">#{movieContent},</if>
+            <if test="movieLink != null  and movieLink != ''">#{movieLink},</if>
+            <if test="movieLinknotes != null  and movieLinknotes != ''">#{movieLinknotes},</if>
+            <if test="status != null  and status != ''">#{status},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="uuid != null  and uuid != ''">#{uuid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateMovie" parameterType="Movie">
+        update bl_movie
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="movieTitle != null  and movieTitle != ''">movie_title = #{movieTitle},</if>
+            <if test="movieType != null  and movieType != ''">movie_type = #{movieType},</if>
+            <if test="movieLabel != null  and movieLabel != ''">movie_label = #{movieLabel},</if>
+            <if test="movieImg != null  and movieImg != ''">movie_img = #{movieImg},</if>
+            <if test="movieDescribe != null  and movieDescribe != ''">movie_describe = #{movieDescribe},</if>
+            <if test="movieContent != null  and movieContent != ''">movie_content = #{movieContent},</if>
+            <if test="movieLink != null  and movieLink != ''">movie_link = #{movieLink},</if>
+            <if test="movieLinknotes != null  and movieLinknotes != ''">movie_linknotes = #{movieLinknotes},</if>
+            <if test="status != null  and status != ''">status = #{status},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="uuid != null  and uuid != ''">uuid = #{uuid},</if>
+        </trim>
+        where movie_id = #{movieId}
+    </update>
+
+    <delete id="deleteMovieById" parameterType="Integer">
+        delete from bl_movie where movie_id = #{movieId}
+    </delete>
+
+    <delete id="deleteMovieByIds" parameterType="String">
+        delete from bl_movie where movie_id in 
+        <foreach item="movieId" collection="array" open="(" separator="," close=")">
+            #{movieId}
+        </foreach>
+    </delete>
+
+    <select id="selectMovieListByNewest" parameterType="Integer" resultMap="MovieResult">
+        <include refid="selectMovieCut"/>
+        where 1=1 and status = '0' ORDER BY update_time DESC LIMIT 9
+    </select>
+</mapper>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>统计</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link th:href="@{/css/main/animate.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/main/style.min862f.css}" rel="stylesheet"/>
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html"/>
+    <![endif]-->
+    <link th:href="@{favicon.ico}" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/jquery.contextMenu.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/animate.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/skins.css}" rel="stylesheet"/>
+    <link th:href="@{/ruoyi/css/ry-ui.css?v=4.1.0}" rel="stylesheet"/>
+</head>
+<style>
+    .row-top{
+        margin-bottom: 30px;
+        max-height: 310px;
+        overflow:hidden;
+    }
+    .carousel-indicators{
+        bottom:0px !important;
+    }
+    .carousel-caption{
+        padding-bottom:0px !important;
+    }
+    .ibox{
+        box-shadow:0px 0px 10px #8E8E8E;
+    }
+    .ibox-content p{
+        width: 100%;/*需要指定宽度*/
+        overflow: hidden;/*溢出隐藏*/
+        text-overflow: ellipsis;
+        white-space: nowrap;/*强制不换行*/
+    }
+    a{
+        color:#666;
+    }
+    a:hover{
+        color:#666;
+    }
+    .ibox-content-title{
+        width: 80%;/*需要指定宽度*/
+        float:left;
+        overflow: hidden;/*溢出隐藏*/
+        text-overflow: ellipsis;
+        white-space: nowrap;/*强制不换行*/
+    }
+    .ibox-content-time{
+        width: 20%;/*需要指定宽度*/
+        float:right;
+        text-align: right;
+    }
+</style>
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="row-top">
+            <!--轮播图class="container"-->
+            <div class="col-sm-8">
+                <div class="carousel slide" id="slidershow" data-ride="carousel" data-interval="5000">
+                    <!--计数器-->
+                    <ol class="carousel-indicators">
+                        <li class="active" data-target="#slidershow" data-slide-to="0"></li>
+                        <li data-target="#slidershow" data-slide-to="1"></li>
+                        <li data-target="#slidershow" data-slide-to="2"></li>
+                    </ol>
+                    <!--图片容器-->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img th:src="@{/img/profile.jpg}" class = 'center-block'/>
+                            <!--添加对应标题和内容-->
+                            <div class="carousel-caption">
+                                <h3>添加对应标题和内容加对应标题和内容加对应标题和内容加对应标题和内容</h3>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img th:src="@{/img/profile.jpg}" class = 'center-block'/>
+                            <!--添加对应标题和内容-->
+                            <div class="carousel-caption">
+                                <h3>图二</h3>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img th:src="@{/img/profile.jpg}" class = 'center-block'/>
+                            <!--添加对应标题和内容-->
+                            <div class="carousel-caption">
+                                <h3>图三</h3>
+                            </div>
+                        </div>
+                        <!--轮播导航-->
+                        <a href="#slidershow" data-slide="prev" class="left carousel-control" role="button">
+
+                        </a>
+                        <a href="#slidershow" data-slide="next" class="right carousel-control" role="button">
+
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4" >
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>最新动态</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <p><a href="#">No.1 平面设计（graphic design），也称为视觉传达设计，是以“视觉”作为沟通和表现的方式</a></p>
+                        <p><a href="#">No.2 平面设计（graphic design），也称为视觉传达设计，是以“视觉”作为沟通和表现的方式</a></p>
+                        <p><a href="#">No.3 平面设计（graphic design），也称为视觉传达设计，是以“视觉”作为沟通和表现的方式</a></p>
+                        <p><a href="#">No.4 平面设计（graphic design），也称为视觉传达设计，是以“视觉”作为沟通和表现的方式</a></p>
+                        <p><a href="#">No.5 平面设计（graphic design），也称为视觉传达设计，是以“视觉”作为沟通和表现的方式</a></p>
+                        <p><a href="#">No.6 平面设计（graphic design），也称为视觉传达设计，是以“视觉”作为沟通和表现的方式</a></p>
+                        <p><a href="#">No.7 平面设计（graphic design），也称为视觉传达设计，是以“视觉”作为沟通和表现的方式</a></p>
+                        <p><a href="#">No.8 平面设计（graphic design），也称为视觉传达设计，是以“视觉”作为沟通和表现的方式</a></p>
+                        <p><a href="#">No.9 平面设计（graphic design），也称为视觉传达设计，是以“视觉”作为沟通和表现的方式</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4" >
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>最新文章</h5>
+                </div>
+                <div class="ibox-content" id="articleNewlist">
+                </div>
+            </div>
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>最新图册</h5>
+                </div>
+                <div class="ibox-content" id="atlasNewlist">
+                </div>
+            </div>
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>最新漫画</h5>
+                </div>
+                <div class="ibox-content" id="cartoonNewlist">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>最新动漫</h5>
+                </div>
+                <div class="ibox-content" id="comicNewlist">
+                </div>
+            </div>
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>最新游戏</h5>
+                </div>
+                <div class="ibox-content" id="gameNewlist">
+                </div>
+            </div>
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>最新电影</h5>
+                </div>
+                <div class="ibox-content" id="movieNewlist">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>最新小说</h5>
+                </div>
+                <div class="ibox-content" id="novelNewlist">
+                </div>
+            </div>
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>最新软件&工具</h5>
+                </div>
+                <div class="ibox-content" id="softwareNewlist">
+                </div>
+            </div>
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>最新软件&工具</h5>
+                </div>
+                <div class="ibox-content" id="softwareNewlist1">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+<script th:src="@{/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+<script th:src="@{/js/jquery.contextMenu.min.js}"></script>
+<script th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
+<script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+<script th:src="@{/ruoyi/js/ry-ui.js?v=4.1.0}"></script>
+<script th:src="@{/ruoyi/js/common.js?v=4.1.0}"></script>
+<script th:src="@{/ruoyi/index.js}"></script>
+<script th:src="@{/ajax/libs/fullscreen/jquery.fullscreen.js}"></script>
+<script th:src="@{/ajax/libs/flot/jquery.flot.js}"/>
+<th:block th:include="include :: sparkline-js" />
+<script type="text/javascript">
+    var prefix = "/heartbeat/business/";
+    function tabclick(title,url,panel){
+        $.modal.openIndexTab(title, url,panel);
+    }
+    $(function(){
+
+        $.ajax({
+            type: "POST",
+            url: prefix + "article/newest",
+            success: function(result) {
+                var data = eval('('+result+')');
+                var str = "";
+                for(var i=0;i<9;i++){
+                    if(i<data.length){
+                        var date = new Date(data[i].updateTime);
+                        var time = date.getFullYear() + '-' + ((date.getMonth()+1)>9?date.getMonth()+1:'0'+(date.getMonth()+1)) + '-' + date.getDate()
+                        var title = data[i].articleTitle.length>28?data[i].articleTitle.substring(0,28)+"...":data[i].articleTitle;
+                        var url = prefix + "article/view/"+data[i].articleId;
+                        str += "<a href='#' onclick=\"tabclick('"+data[i].articleTitle+"-资讯详情','"+url+"','article')\"><p>";
+                        str += "<span class='ibox-content-title' \'>No."+(i+1)+" "+title+"</span>";
+                        str += "<span class='ibox-content-time' \'>"+time+"</span>";
+                        str += "</p></a>";
+                    }else{
+                        str += "<br>";
+                    }
+                }
+                $("#articleNewlist").html(str);
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: prefix + "atlas/newest",
+            success: function(result) {
+                var data = eval('('+result+')');
+                var str = "";
+                for(var i=0;i<9;i++){
+                    if(i<data.length){
+                        var date = new Date(data[i].updateTime);
+                        var time = date.getFullYear() + '-' + ((date.getMonth()+1)>9?date.getMonth()+1:'0'+(date.getMonth()+1)) + '-' + date.getDate()
+                        var title = data[i].atlasTitle.length>28?data[i].atlasTitle.substring(0,28)+"...":data[i].atlasTitle;
+                        var url = prefix + "atlas/view/"+data[i].atlasId;
+                        str += "<a href='#' onclick=\"tabclick('"+data[i].atlasTitle+"-资讯详情','"+url+"','atlas')\"><p>";
+                        str += "<span class='ibox-content-title' \'>No."+(i+1)+" "+title+"</span>";
+                        str += "<span class='ibox-content-time' \'>"+time+"</span>";
+                        str += "</p></a>";
+                    }else{
+                        str += "<br>";
+                    }
+                }
+                $("#atlasNewlist").html(str);
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: prefix + "cartoon/newest",
+            success: function(result) {
+                var data = eval('('+result+')');
+                var str = "";
+                for(var i=0;i<9;i++){
+                    if(i<data.length){
+                        var date = new Date(data[i].updateTime);
+                        var time = date.getFullYear() + '-' + ((date.getMonth()+1)>9?date.getMonth()+1:'0'+(date.getMonth()+1)) + '-' + date.getDate()
+                        var title = data[i].cartoonTitle.length>28?data[i].cartoonTitle.substring(0,28)+"...":data[i].cartoonTitle;
+                        var url = prefix + "cartoon/view/"+data[i].cartoonId;
+                        str += "<a href='#' onclick=\"tabclick('"+data[i].cartoonTitle+"-资讯详情','"+url+"','cartoon')\"><p>";
+                        str += "<span class='ibox-content-title' \'>No."+(i+1)+" "+title+"</span>";
+                        str += "<span class='ibox-content-time' \'>"+time+"</span>";
+                        str += "</p></a>";
+                    }else{
+                        str += "<br>";
+                    }
+                }
+                $("#cartoonNewlist").html(str);
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: prefix + "comic/newest",
+            success: function(result) {
+                var data = eval('('+result+')');
+                var str = "";
+                for(var i=0;i<9;i++){
+                    if(i<data.length){
+                        var date = new Date(data[i].updateTime);
+                        var time = date.getFullYear() + '-' + ((date.getMonth()+1)>9?date.getMonth()+1:'0'+(date.getMonth()+1)) + '-' + date.getDate()
+                        var title = data[i].comicTitle.length>28?data[i].comicTitle.substring(0,28)+"...":data[i].comicTitle;
+                        var url = prefix + "comic/view/"+data[i].comicId;
+                        str += "<a href='#' onclick=\"tabclick('"+data[i].comicTitle+"-资讯详情','"+url+"','comic')\"><p>";
+                        str += "<span class='ibox-content-title' \'>No."+(i+1)+" "+title+"</span>";
+                        str += "<span class='ibox-content-time' \'>"+time+"</span>";
+                        str += "</p></a>";
+                    }else{
+                        str += "<br>";
+                    }
+                }
+                $("#comicNewlist").html(str);
+            }
+        })
+
+        $.ajax({
+            type: "POST",
+            url: prefix + "game/newest",
+            success: function(result) {
+                var data = eval('('+result+')');
+                var str = "";
+                for(var i=0;i<9;i++){
+                    if(i<data.length){
+                        var date = new Date(data[i].updateTime);
+                        var time = date.getFullYear() + '-' + ((date.getMonth()+1)>9?date.getMonth()+1:'0'+(date.getMonth()+1)) + '-' + date.getDate()
+                        var title = data[i].gameTitle.length>28?data[i].gameTitle.substring(0,28)+"...":data[i].gameTitle;
+                        var url = prefix + "game/view/"+data[i].gameId;
+                        str += "<a href='#' onclick=\"tabclick('"+data[i].gameTitle+"-资讯详情','"+url+"','game')\"><p>";
+                        str += "<span class='ibox-content-title' \'>No."+(i+1)+" "+title+"</span>";
+                        str += "<span class='ibox-content-time' \'>"+time+"</span>";
+                        str += "</p></a>";
+                    }else{
+                        str += "<br>";
+                    }
+                }
+                $("#gameNewlist").html(str);
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: prefix + "movie/newest",
+            success: function(result) {
+                var data = eval('('+result+')');
+                var str = "";
+                for(var i=0;i<9;i++){
+                    if(i<data.length){
+                        var date = new Date(data[i].updateTime);
+                        var time = date.getFullYear() + '-' + ((date.getMonth()+1)>9?date.getMonth()+1:'0'+(date.getMonth()+1)) + '-' + date.getDate()
+                        var title = data[i].movieTitle.length>28?data[i].movieTitle.substring(0,28)+"...":data[i].movieTitle;
+                        var url = prefix + "movie/view/"+data[i].movieId;
+                        str += "<a href='#' onclick=\"tabclick('"+data[i].movieTitle+"-资讯详情','"+url+"','movie')\"><p>";
+                        str += "<span class='ibox-content-title' \'>No."+(i+1)+" "+title+"</span>";
+                        str += "<span class='ibox-content-time' \'>"+time+"</span>";
+                        str += "</p></a>";
+                    }else{
+                        str += "<br>";
+                    }
+                }
+                $("#movieNewlist").html(str);
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: prefix + "novel/newest",
+            success: function(result) {
+                var data = eval('('+result+')');
+                var str = "";
+                for(var i=0;i<9;i++){
+                    if(i<data.length){
+                        var date = new Date(data[i].updateTime);
+                        var time = date.getFullYear() + '-' + ((date.getMonth()+1)>9?date.getMonth()+1:'0'+(date.getMonth()+1)) + '-' + date.getDate()
+                        var title = data[i].novelTitle.length>28?data[i].novelTitle.substring(0,28)+"...":data[i].novelTitle;
+                        var url = prefix + "novel/view/"+data[i].novelId;
+                        str += "<a href='#' onclick=\"tabclick('"+data[i].novelTitle+"-资讯详情','"+url+"','novel')\"><p>";
+                        str += "<span class='ibox-content-title' \'>No."+(i+1)+" "+title+"</span>";
+                        str += "<span class='ibox-content-time' \'>"+time+"</span>";
+                        str += "</p></a>";
+                    }else{
+                        str += "<br>";
+                    }
+                }
+                $("#novelNewlist").html(str);
+            }
+        });
+
+
+    });
+</script>
+</body>
+</html>
