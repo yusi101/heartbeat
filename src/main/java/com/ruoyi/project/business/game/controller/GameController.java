@@ -161,8 +161,6 @@ public class GameController extends BaseController
     @ResponseBody
     public AjaxResult addSave(Game game)
     {
-        game.setCreateBy(getUserId().toString());
-        game.setUpdateBy(getUserId().toString());
         return toAjax(gameService.insertGame(game));
     }
 
@@ -186,7 +184,6 @@ public class GameController extends BaseController
     @ResponseBody
     public AjaxResult editSave(Game game)
     {
-        game.setUpdateBy(getUserId().toString());
         return toAjax(gameService.updateGame(game));
     }
 

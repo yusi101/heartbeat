@@ -2,6 +2,7 @@ package com.ruoyi.project.business.movie.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.security.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.project.business.movie.mapper.MovieMapper;
@@ -54,8 +55,8 @@ public class MovieServiceImpl implements IMovieService
     @Override
     public int insertMovie(Movie movie)
     {
+        movie.setCreateBy(ShiroUtils.getUserId().toString());
         movie.setCreateTime(DateUtils.getNowDate());
-        movie.setUpdateTime(DateUtils.getNowDate());
         return movieMapper.insertMovie(movie);
     }
 
@@ -68,6 +69,7 @@ public class MovieServiceImpl implements IMovieService
     @Override
     public int updateMovie(Movie movie)
     {
+        movie.setUpdateBy(ShiroUtils.getUserId().toString());
         movie.setUpdateTime(DateUtils.getNowDate());
         return movieMapper.updateMovie(movie);
     }

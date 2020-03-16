@@ -35,14 +35,17 @@
                         </td>
 
                     </tr>
-                    <tr th:if=" ${novel.novelLink} eq ''">>
-                        <th class="text-nowrap">外链：</th>
-                        <td colspan="4">[[${novel.novelLink}]]</td>
-                    </tr>
-                    <tr th:if=" ${novel.novelLinknotes} eq ''">
-                        <th class="text-nowrap">备注：</th>
-                        <td colspan="4">[[${novel.novelLinknotes}]]</td>
-                    </tr>
+                    <div th:if=" ${novel.novelLink != '' || novel.novelLink !=} ne ''">
+                        <tr>
+                            <th class="text-nowrap">外链：</th>
+                            <td colspan="4">[[${novel.novelLink}]]</td>
+                        </tr>
+                        <tr>
+                            <th class="text-nowrap">备注：</th>
+                            <td colspan="4">[[${novel.novelLinknotes}]]</td>
+                        </tr>
+                    </div>
+
                     </tbody>
                 </table>
             </div>

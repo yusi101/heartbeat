@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
-    <th:block th:include="include :: header(${game.gameTitle}+'-游戏详情')" />
+    <th:block th:include="include :: header(${article.articleTitle}+'-文章详情')" />
     <th:block th:include="include :: summernote-css" />
 </head>
 <body class="white-bg">
@@ -12,12 +12,12 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th colspan="5" style="text-align:center;"><h2>[[${game.gameTitle}]]</h2></th>
+                        <th colspan="5" style="text-align:center;"><h2>[[${article.articleTitle}]]</h2></th>
                     </tr>
                     <tr>
-                        <th colspan="2" style="text-align:left;">作者：[[${game.updateBy}]]</th>
+                        <th colspan="2" style="text-align:left;">作者：[[${article.updateBy}]]</th>
                         <th style="text-align:center;">喜爱人数：xxxxx</th>
-                        <th colspan="2" style="text-align:right;">时间：[[${#dates.format(game.updateTime,'yyyy-MM-dd HH:mm')}]]</th>
+                        <th colspan="2" style="text-align:right;">时间：[[${#dates.format(article.updateTime,'yyyy-MM-dd HH:mm')}]]</th>
                     </tr>
                     <tr>
                         <th colspan="5" style="line-height: 28px">标签：
@@ -31,36 +31,35 @@
                     <tr>
                         <td colspan="5">
                             <div id="summernote"></div>
-                            <input type="hidden" id="game_content" th:field="*{game.gameContent}">
+                            <input type="hidden" id="article_content" th:field="*{article.articleContent}">
                         </td>
 
                     </tr>
-                    <div th:if=" ${game.gameLink != '' || game.gameLink != null}">
+                    <div  th:if=" ${article.articleLink != '' && article.articleLink != null}">
                         <tr>
                             <th class="text-nowrap">外链：</th>
-                            <td colspan="4">[[${game.gameLink}]]</td>
+                            <td colspan="4">[[${article.articleLink}]]</td>
                         </tr>
                         <tr>
                             <th class="text-nowrap">备注：</th>
-                            <td colspan="4">[[${game.gameLinknotes}]]</td>
+                            <td colspan="4">[[${article.articleLinknotes}]]</td>
                         </tr>
                     </div>
-
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="col-sm-4" id="Business_2">
+        <div class="col-sm-4" id="Article_2">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5>最新游戏</h5>
+                    <h5>最新文章</h5>
                 </div>
                 <div class="ibox-content" id="newest1">
                 </div>
             </div>
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5>热门游戏</h5>
+                    <h5>热门文章</h5>
                 </div>
                 <div class="ibox-content" id="newest2">
                 </div>
@@ -74,12 +73,12 @@
 <th:block th:include="include :: footer" />
 <th:block th:include="include :: summernote-js" />
 <script type="text/javascript">
-    var prefix = ctx + "business/game";
+    var prefix = ctx + "business/article";
     function tabclick(title,url){
-        $.modal.openTab(title+'-游戏详情', url);
+        $.modal.openTab(title+'-详情', url);
     }
     $(function(){
-        var innerhtml = $("#game_content").val();
+        var innerhtml = $("#article_content").val();
         $("#summernote").html(innerhtml);
 
         $.ajax({
@@ -90,19 +89,21 @@
                 var str = "";
                 for(var i=0;i<9;i++){
                     if(i<data.length){
-                        var url = prefix + "/view/"+data[i].gameId;
-                        str += "<a href='#' onclick=\"tabclick('"+data[i].gameTitle+"','"+url+"')\">";
-                        str += "<p>No."+(i+1)+" "+data[i].gameTitle+"</p>";
+                        var url = prefix + "/view/"+data[i].articleId;
+                        str += "<a href='#' onclick=\"tabclick('"+data[i].articleTitle+"','"+url+"')\">";
+                        str += "<p>No."+(i+1)+" "+data[i].articleTitle+"</p>";
                         str += "</a>";
                     }else{
                         str += "<br>";
                     }
+
                 }
                 $("#newest1").html(str);
                 $("#newest2").html(str);
             }
         });
     });
+
 </script>
 </body>
 </html>

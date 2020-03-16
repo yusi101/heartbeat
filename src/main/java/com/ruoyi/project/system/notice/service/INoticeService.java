@@ -27,6 +27,12 @@ public interface INoticeService
     public List<Notice> selectNoticeList(Notice notice);
 
     /**
+     * 最新公告 （查询前10条）
+     *
+     * @return
+     */
+    public List<Notice> selectNoticeListByNewest();
+    /**
      * 新增公告
      * 
      * @param notice 公告信息

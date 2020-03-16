@@ -2,6 +2,7 @@ package com.ruoyi.project.business.cartoon.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.security.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.project.business.cartoon.mapper.CartoonMapper;
@@ -54,8 +55,8 @@ public class CartoonServiceImpl implements ICartoonService
     @Override
     public int insertCartoon(Cartoon cartoon)
     {
+        cartoon.setCreateBy(ShiroUtils.getUserId().toString());
         cartoon.setCreateTime(DateUtils.getNowDate());
-        cartoon.setUpdateTime(DateUtils.getNowDate());
         return cartoonMapper.insertCartoon(cartoon);
     }
 
@@ -68,6 +69,7 @@ public class CartoonServiceImpl implements ICartoonService
     @Override
     public int updateCartoon(Cartoon cartoon)
     {
+        cartoon.setUpdateBy(ShiroUtils.getUserId().toString());
         cartoon.setUpdateTime(DateUtils.getNowDate());
         return cartoonMapper.updateCartoon(cartoon);
     }

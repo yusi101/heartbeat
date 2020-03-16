@@ -28,6 +28,13 @@ public interface IArticleService
     public List<Article> selectArticleList(Article article);
 
     /**
+     * 根据 标题和标签 模糊查询
+     * @param keyword
+     * @return
+     */
+    public List<Article> selectArticleListByKw(String keyword);
+
+    /**
      * 新增文章
      * 
      * @param article 文章

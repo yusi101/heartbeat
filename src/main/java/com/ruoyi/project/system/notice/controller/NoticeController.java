@@ -1,6 +1,9 @@
 package com.ruoyi.project.system.notice.controller;
 
 import java.util.List;
+
+import com.alibaba.fastjson.JSON;
+import com.ruoyi.project.business.article.domain.Article;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,6 +54,16 @@ public class NoticeController extends BaseController
         List<Notice> list = noticeService.selectNoticeList(notice);
         return getDataTable(list);
     }
+    /**
+     * 最新公告 （查询前10条）
+     */
+    @PostMapping("/newest")
+    @ResponseBody
+    public String newest(ModelMap map)
+    {
+        List<Notice> list = noticeService.selectNoticeListByNewest();
+        return JSON.toJSONString(list);
+    }
 
     /**
      * 新增公告
@@ -79,6 +92,7 @@ public class NoticeController extends BaseController
     @GetMapping("/edit/{noticeId}")
     public String edit(@PathVariable("noticeId") Long noticeId, ModelMap mmap)
     {
+
         mmap.put("notice", noticeService.selectNoticeById(noticeId));
         return prefix + "/edit";
     }

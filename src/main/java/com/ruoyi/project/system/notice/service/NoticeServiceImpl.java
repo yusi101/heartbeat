@@ -1,6 +1,8 @@
 package com.ruoyi.project.system.notice.service;
 
 import java.util.List;
+
+import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.common.utils.security.ShiroUtils;
@@ -46,6 +48,17 @@ public class NoticeServiceImpl implements INoticeService
     }
 
     /**
+     * 查询最新公告（前10条）
+     *
+     * @return
+     */
+    @Override
+    public List<Notice> selectNoticeListByNewest()
+    {
+        return noticeMapper.selectNoticeListByNewest();
+    }
+
+    /**
      * 新增公告
      * 
      * @param notice 公告信息
@@ -54,7 +67,8 @@ public class NoticeServiceImpl implements INoticeService
     @Override
     public int insertNotice(Notice notice)
     {
-        notice.setCreateBy(ShiroUtils.getLoginName());
+        notice.setCreateBy(ShiroUtils.getUserId().toString());
+        notice.setCreateTime(DateUtils.getNowDate());
         return noticeMapper.insertNotice(notice);
     }
 
@@ -67,7 +81,8 @@ public class NoticeServiceImpl implements INoticeService
     @Override
     public int updateNotice(Notice notice)
     {
-        notice.setUpdateBy(ShiroUtils.getLoginName());
+        notice.setUpdateBy(ShiroUtils.getUserId().toString());
+        notice.setUpdateTime(DateUtils.getNowDate());
         return noticeMapper.updateNotice(notice);
     }
 

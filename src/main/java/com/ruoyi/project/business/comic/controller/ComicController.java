@@ -161,8 +161,6 @@ public class ComicController extends BaseController
     @ResponseBody
     public AjaxResult addSave(Comic comic)
     {
-        comic.setCreateBy(getUserId().toString());
-        comic.setUpdateBy(getUserId().toString());
         return toAjax(comicService.insertComic(comic));
     }
 
@@ -186,7 +184,6 @@ public class ComicController extends BaseController
     @ResponseBody
     public AjaxResult editSave(Comic comic)
     {
-        comic.setUpdateBy(getUserId().toString());
         return toAjax(comicService.updateComic(comic));
     }
 

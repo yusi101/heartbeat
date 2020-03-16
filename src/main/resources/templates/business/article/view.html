@@ -35,14 +35,16 @@
                         </td>
 
                     </tr>
-                    <tr th:if=" ${article.articleLink} eq ''">>
-                        <th class="text-nowrap">外链：</th>
-                        <td colspan="4">[[${article.articleLink}]]</td>
-                    </tr>
-                    <tr th:if=" ${article.articleLinknotes} eq ''">
-                        <th class="text-nowrap">备注：</th>
-                        <td colspan="4">[[${article.articleLinknotes}]]</td>
-                    </tr>
+                    <div  th:if=" ${article.articleLink != '' && article.articleLink != null}">
+                        <tr>
+                            <th class="text-nowrap">外链：</th>
+                            <td colspan="4">[[${article.articleLink}]]</td>
+                        </tr>
+                        <tr>
+                            <th class="text-nowrap">备注：</th>
+                            <td colspan="4">[[${article.articleLinknotes}]]</td>
+                        </tr>
+                    </div>
                     </tbody>
                 </table>
             </div>

@@ -161,8 +161,6 @@ public class CartoonController extends BaseController
     @ResponseBody
     public AjaxResult addSave(Cartoon cartoon)
     {
-        cartoon.setCreateBy(getUserId().toString());
-        cartoon.setUpdateBy(getUserId().toString());
         return toAjax(cartoonService.insertCartoon(cartoon));
     }
 
@@ -186,7 +184,6 @@ public class CartoonController extends BaseController
     @ResponseBody
     public AjaxResult editSave(Cartoon cartoon)
     {
-        cartoon.setUpdateBy(getUserId().toString());
         return toAjax(cartoonService.updateCartoon(cartoon));
     }
 

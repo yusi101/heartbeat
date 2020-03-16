@@ -162,8 +162,6 @@ public class MovieController extends BaseController
     @ResponseBody
     public AjaxResult addSave(Movie movie)
     {
-        movie.setCreateBy(getUserId().toString());
-        movie.setUpdateBy(getUserId().toString());
         return toAjax(movieService.insertMovie(movie));
     }
 
@@ -187,7 +185,6 @@ public class MovieController extends BaseController
     @ResponseBody
     public AjaxResult editSave(Movie movie)
     {
-        movie.setUpdateBy(getUserId().toString());
         return toAjax(movieService.updateMovie(movie));
     }
 

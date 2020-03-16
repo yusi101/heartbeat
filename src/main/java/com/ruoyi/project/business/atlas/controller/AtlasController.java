@@ -159,8 +159,6 @@ public class AtlasController extends BaseController
     @ResponseBody
     public AjaxResult addSave(Atlas atlas)
     {
-        atlas.setCreateBy(getUserId().toString());
-        atlas.setUpdateBy(getUserId().toString());
         return toAjax(atlasService.insertAtlas(atlas));
     }
 
@@ -184,7 +182,6 @@ public class AtlasController extends BaseController
     @ResponseBody
     public AjaxResult editSave(Atlas atlas)
     {
-        atlas.setUpdateBy(getUserId().toString());
         return toAjax(atlasService.updateAtlas(atlas));
     }
 

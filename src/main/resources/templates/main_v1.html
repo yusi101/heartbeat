@@ -213,7 +213,8 @@
 <script th:src="@{/ajax/libs/flot/jquery.flot.js}"/>
 <th:block th:include="include :: sparkline-js" />
 <script type="text/javascript">
-    var prefix = "/heartbeat/business/";
+    var prefix = "/business/";
+    var prefix1 = "/heartbeat/business/";
     function tabclick(title,url,panel){
         $.modal.openIndexTab(title, url,panel);
     }

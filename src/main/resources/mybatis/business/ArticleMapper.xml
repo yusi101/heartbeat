@@ -124,4 +124,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectArticleCut"/>
         where 1=1 and status = '0' ORDER BY update_time DESC LIMIT 9
     </select>
+
+    <select id="selectArticleListByKw" parameterType="String" resultMap="ArticleResult">
+        <include refid="selectArticleCut"/>
+        where 1=1
+        and article_title like '%'#{keyword}'%'
+        and article_label like '%'#{keyword}'%'
+        and status = '0' ORDER BY update_time DESC LIMIT 9
+    </select>
 </mapper>

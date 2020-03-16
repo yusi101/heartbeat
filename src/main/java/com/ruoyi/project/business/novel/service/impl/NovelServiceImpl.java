@@ -2,6 +2,7 @@ package com.ruoyi.project.business.novel.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.security.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.project.business.novel.mapper.NovelMapper;
@@ -54,8 +55,8 @@ public class NovelServiceImpl implements INovelService
     @Override
     public int insertNovel(Novel novel)
     {
+        novel.setCreateBy(ShiroUtils.getUserId().toString());
         novel.setCreateTime(DateUtils.getNowDate());
-        novel.setUpdateTime(DateUtils.getNowDate());
         return novelMapper.insertNovel(novel);
     }
 
@@ -68,6 +69,7 @@ public class NovelServiceImpl implements INovelService
     @Override
     public int updateNovel(Novel novel)
     {
+        novel.setUpdateBy(ShiroUtils.getUserId().toString());
         novel.setUpdateTime(DateUtils.getNowDate());
         return novelMapper.updateNovel(novel);
     }

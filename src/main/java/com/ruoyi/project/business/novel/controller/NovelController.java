@@ -161,8 +161,6 @@ public class NovelController extends BaseController
     @ResponseBody
     public AjaxResult addSave(Novel novel)
     {
-        novel.setCreateBy(getUserId().toString());
-        novel.setUpdateBy(getUserId().toString());
         return toAjax(novelService.insertNovel(novel));
     }
 
@@ -186,7 +184,6 @@ public class NovelController extends BaseController
     @ResponseBody
     public AjaxResult editSave(Novel novel)
     {
-        novel.setUpdateBy(getUserId().toString());
         return toAjax(novelService.updateNovel(novel));
     }
 

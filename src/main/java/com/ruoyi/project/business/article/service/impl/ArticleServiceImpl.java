@@ -2,6 +2,7 @@ package com.ruoyi.project.business.article.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.security.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.project.business.article.mapper.ArticleMapper;
@@ -46,6 +47,17 @@ public class ArticleServiceImpl implements IArticleService
     }
 
     /**
+     * 根据 标题和标签 模糊查询
+     * @param keyword
+     * @return
+     */
+    @Override
+    public List<Article> selectArticleListByKw(String keyword)
+    {
+        return articleMapper.selectArticleListByKw(keyword);
+    }
+
+    /**
      * 新增文章
      * 
      * @param article 文章
@@ -54,8 +66,8 @@ public class ArticleServiceImpl implements IArticleService
     @Override
     public int insertArticle(Article article)
     {
+        article.setCreateBy(ShiroUtils.getUserId().toString());
         article.setCreateTime(DateUtils.getNowDate());
-        article.setUpdateTime(DateUtils.getNowDate());
         return articleMapper.insertArticle(article);
     }
 
@@ -68,6 +80,8 @@ public class ArticleServiceImpl implements IArticleService
     @Override
     public int updateArticle(Article article)
     {
+
+        article.setUpdateBy(ShiroUtils.getUserId().toString());
         article.setUpdateTime(DateUtils.getNowDate());
         return articleMapper.updateArticle(article);
     }

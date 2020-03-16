@@ -35,14 +35,17 @@
                         </td>
 
                     </tr>
-                    <tr th:if=" ${movie.movieLink} eq ''">>
-                        <th class="text-nowrap">外链：</th>
-                        <td colspan="4">[[${movie.movieLink}]]</td>
-                    </tr>
-                    <tr th:if=" ${movie.movieLinknotes} eq ''">
-                        <th class="text-nowrap">备注：</th>
-                        <td colspan="4">[[${movie.movieLinknotes}]]</td>
-                    </tr>
+                    <div th:if=" ${movie.movieLink != '' || movie.movieLink != null}">
+                        <tr>
+                            <th class="text-nowrap">外链：</th>
+                            <td colspan="4">[[${movie.movieLink}]]</td>
+                        </tr>
+                        <tr>
+                            <th class="text-nowrap">备注：</th>
+                            <td colspan="4">[[${movie.movieLinknotes}]]</td>
+                        </tr>
+                    </div>
+
                     </tbody>
                 </table>
             </div>

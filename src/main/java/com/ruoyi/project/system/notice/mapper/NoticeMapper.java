@@ -27,6 +27,13 @@ public interface NoticeMapper
     public List<Notice> selectNoticeList(Notice notice);
 
     /**
+     * 查询最新公告（前10条）
+     *
+     * @return
+     */
+    public List<Notice> selectNoticeListByNewest();
+
+    /**
      * 新增公告
      * 
      * @param notice 公告信息

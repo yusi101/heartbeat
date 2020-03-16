@@ -3,6 +3,8 @@ package com.ruoyi.project.system.user.controller;
 import java.util.List;
 
 import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.project.business.article.domain.Article;
+import com.ruoyi.project.business.article.service.IArticleService;
 import com.ruoyi.project.system.notice.domain.Notice;
 import com.ruoyi.project.system.notice.service.INoticeService;
 import com.ruoyi.project.system.post.domain.Post;
@@ -41,8 +43,13 @@ public class IndexController extends BaseController
 
     @Autowired
     private IPostService postService;
+
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private IArticleService articleService;
+
 
     @Value("${visitor.userId}")
     private long userId;
@@ -75,7 +82,12 @@ public class IndexController extends BaseController
         mmap.put("demoEnabled", ruoYiConfig.isDemoEnabled());
         return "index";
     }
-
+    @GetMapping("/search")
+    public String search(ModelMap map)
+    {
+        List<Article> list = articleService.selectArticleListByKw(map.get("keyword").toString());
+        return "business/list";
+    }
     // 切换主题
     @GetMapping("/system/switchSkin")
     public String switchSkin(ModelMap mmap)

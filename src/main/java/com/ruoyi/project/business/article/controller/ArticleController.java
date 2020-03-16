@@ -162,8 +162,6 @@ public class ArticleController extends BaseController
     @ResponseBody
     public AjaxResult addSave(Article article)
     {
-        article.setCreateBy(getUserId().toString());
-        article.setUpdateBy(getUserId().toString());
         return toAjax(articleService.insertArticle(article));
     }
 
@@ -187,8 +185,6 @@ public class ArticleController extends BaseController
     @ResponseBody
     public AjaxResult editSave(Article article)
     {
-
-        article.setUpdateBy(getUserId().toString());
         return toAjax(articleService.updateArticle(article));
     }
 

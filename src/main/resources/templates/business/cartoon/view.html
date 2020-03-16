@@ -35,14 +35,17 @@
                         </td>
 
                     </tr>
-                    <tr th:if=" ${cartoon.cartoonLink} eq ''">>
-                        <th class="text-nowrap">外链：</th>
-                        <td colspan="4">[[${cartoon.cartoonLink}]]</td>
-                    </tr>
-                    <tr th:if=" ${cartoon.cartoonLinknotes} eq ''">
-                        <th class="text-nowrap">备注：</th>
-                        <td colspan="4">[[${cartoon.cartoonLinknotes}]]</td>
-                    </tr>
+                    <div th:if=" ${cartoon.cartoonLink != '' || cartoon.cartoonLink != null}">
+                        <tr>
+                            <th class="text-nowrap">外链：</th>
+                            <td colspan="4">[[${cartoon.cartoonLink}]]</td>
+                        </tr>
+                        <tr>
+                            <th class="text-nowrap">备注：</th>
+                            <td colspan="4">[[${cartoon.cartoonLinknotes}]]</td>
+                        </tr>
+                    </div>
+
                     </tbody>
                 </table>
             </div>

@@ -2,6 +2,7 @@ package com.ruoyi.project.business.game.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.security.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.project.business.game.mapper.GameMapper;
@@ -54,8 +55,8 @@ public class GameServiceImpl implements IGameService
     @Override
     public int insertGame(Game game)
     {
+        game.setCreateBy(ShiroUtils.getUserId().toString());
         game.setCreateTime(DateUtils.getNowDate());
-        game.setUpdateTime(DateUtils.getNowDate());
         return gameMapper.insertGame(game);
     }
 
@@ -68,6 +69,7 @@ public class GameServiceImpl implements IGameService
     @Override
     public int updateGame(Game game)
     {
+        game.setUpdateBy(ShiroUtils.getUserId().toString());
         game.setUpdateTime(DateUtils.getNowDate());
         return gameMapper.updateGame(game);
     }

@@ -35,14 +35,17 @@
                         </td>
 
                     </tr>
-                    <tr th:if=" ${atlas.atlasLink} eq ''">>
-                        <th class="text-nowrap">外链：</th>
-                        <td colspan="4">[[${atlas.atlasLink}]]</td>
-                    </tr>
-                    <tr th:if=" ${atlas.atlasLinknotes} eq ''">
-                        <th class="text-nowrap">备注：</th>
-                        <td colspan="4">[[${atlas.atlasLinknotes}]]</td>
-                    </tr>
+                    <div th:if=" ${atlas.atlasLink != '' || atlas.atlasLink != null}">
+                        <tr>
+                            <th class="text-nowrap">外链：</th>
+                            <td colspan="4">[[${atlas.atlasLink}]]</td>
+                        </tr>
+                        <tr >
+                            <th class="text-nowrap">备注：</th>
+                            <td colspan="4">[[${atlas.atlasLinknotes}]]</td>
+                        </tr>
+                    </div>
+
                     </tbody>
                 </table>
             </div>

@@ -21,7 +21,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select notice_id, notice_title, notice_type, notice_content, status, create_by, create_time, update_by, update_time, remark 
 		from sys_notice
     </sql>
-    
+
+    <sql id="selectNoticeCut">
+        select notice_id, notice_title, update_time from sys_notice
+    </sql>
     <select id="selectNoticeById" parameterType="Long" resultMap="NoticeResult">
         <include refid="selectNoticeVo"/>
         where notice_id = #{noticeId}
@@ -41,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 		</where>
     </select>
-    
+
     <insert id="insertNotice" parameterType="Notice">
         insert into sys_notice (
 			<if test="noticeTitle != null and noticeTitle != '' ">notice_title, </if>
@@ -81,5 +84,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{noticeId}
         </foreach>
     </delete>
-    
+
+    <select id="selectNoticeListByNewest" parameterType="Notice" resultMap="NoticeResult">
+        <include refid="selectNoticeCut"/>
+        where 1=1 and status = '0' ORDER BY update_time DESC LIMIT 9
+    </select>
 </mapper>

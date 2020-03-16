@@ -2,6 +2,7 @@ package com.ruoyi.project.business.atlas.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.security.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.project.business.atlas.mapper.AtlasMapper;
@@ -54,8 +55,8 @@ public class AtlasServiceImpl implements IAtlasService
     @Override
     public int insertAtlas(Atlas atlas)
     {
+        atlas.setCreateBy(ShiroUtils.getUserId().toString());
         atlas.setCreateTime(DateUtils.getNowDate());
-        atlas.setUpdateTime(DateUtils.getNowDate());
         return atlasMapper.insertAtlas(atlas);
     }
 
@@ -68,6 +69,7 @@ public class AtlasServiceImpl implements IAtlasService
     @Override
     public int updateAtlas(Atlas atlas)
     {
+        atlas.setUpdateBy(ShiroUtils.getUserId().toString());
         atlas.setUpdateTime(DateUtils.getNowDate());
         return atlasMapper.updateAtlas(atlas);
     }
